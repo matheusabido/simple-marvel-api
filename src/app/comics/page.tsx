@@ -29,9 +29,15 @@ function Comics() {
 
   const [data, setData] = useState<Response<Comic> | undefined>(undefined);
 
-  const [titleStartsWith, setTitleStartsWith] = useState("");
-  const [titleStartsWithToBe, setTitleStartsWithToBe] = useState("");
-  const [orderBy, setOrderBy] = useState<"asc" | "desc">("asc");
+  const [titleStartsWith, setTitleStartsWith] = useState(
+    params.get("titleStartsWith") || ""
+  );
+  const [titleStartsWithToBe, setTitleStartsWithToBe] = useState(
+    params.get("titleStartsWith") || ""
+  );
+  const [orderBy, setOrderBy] = useState<"asc" | "desc">(
+    (params.get("orderBy") as "asc" | "desc") || "asc"
+  );
 
   const [page, setPage] = useState(
     Math.max(Number(params.get("page")) || 1, 1)
@@ -82,6 +88,7 @@ function Comics() {
             <div className="flex-1">
               <p>Nome começa com</p>
               <input
+                defaultValue={titleStartsWith}
                 onChange={(e) => setTitleStartsWithToBe(e.currentTarget.value)}
                 className="border rounded p-1 w-full"
               />
@@ -89,6 +96,7 @@ function Comics() {
             <div className="flex-1">
               <p>Ordenar nome</p>
               <select
+                defaultValue={orderBy}
                 onChange={(e) =>
                   setOrderBy(e.currentTarget.value as "asc" | "desc")
                 }

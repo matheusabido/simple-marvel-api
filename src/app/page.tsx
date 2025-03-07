@@ -10,9 +10,9 @@ export default function Home() {
     <>
       <Header />
       <main className="p-4 max-w-[1200px] m-auto">
-        <div className="flex">
+        <div className="flex flex-col sm:flex-row">
           <Image
-            className="border rounded-lg"
+            className="border rounded-lg object-contain m-auto"
             alt="Stan lee"
             src="/Stan_Lee.webp"
             width={300}

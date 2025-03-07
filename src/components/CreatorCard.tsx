@@ -17,7 +17,9 @@ export default function CreatorCard({ creator }: Props) {
         src={`${creator.thumbnail.path}.${creator.thumbnail.extension}`}
         className="w-full aspect-square rounded object-cover"
       />
-      <p className="font-bold my-2">{creator.fullName}</p>
+      <p className="font-bold my-2">
+        {creator.firstName} {creator.lastName}
+      </p>
 
       <p className="mt-4">Escreveu:</p>
       <p>

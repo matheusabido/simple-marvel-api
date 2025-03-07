@@ -29,9 +29,15 @@ function Escritores() {
 
   const [data, setData] = useState<Response<Creator> | undefined>(undefined);
 
-  const [nameStartsWith, setNameStartsWith] = useState("");
-  const [nameStartsWithToBe, setNameStartsWithToBe] = useState("");
-  const [orderBy, setOrderBy] = useState<"asc" | "desc">("asc");
+  const [nameStartsWith, setNameStartsWith] = useState(
+    params.get("nameStartsWith") || ""
+  );
+  const [nameStartsWithToBe, setNameStartsWithToBe] = useState(
+    params.get("nameStartsWith") || ""
+  );
+  const [orderBy, setOrderBy] = useState<"asc" | "desc">(
+    (params.get("orderBy") as "asc" | "desc") || "asc"
+  );
 
   const [page, setPage] = useState(
     Math.max(Number(params.get("page")) || 1, 1)
@@ -82,6 +88,7 @@ function Escritores() {
             <div className="flex-1">
               <p>Nome começa com</p>
               <input
+                defaultValue={nameStartsWith}
                 onChange={(e) => setNameStartsWithToBe(e.currentTarget.value)}
                 className="border rounded p-1 w-full"
               />
@@ -89,6 +96,7 @@ function Escritores() {
             <div className="flex-1">
               <p>Ordenar nome</p>
               <select
+                defaultValue={orderBy}
                 onChange={(e) =>
                   setOrderBy(e.currentTarget.value as "asc" | "desc")
                 }

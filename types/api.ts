@@ -63,7 +63,8 @@ export interface Comic {
 
 export interface Creator {
   id: number;
-  fullName: string;
+  firstName: string;
+  lastName: string;
   thumbnail: {
     path: string;
     extension: string;
