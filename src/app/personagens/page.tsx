@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Character, Response } from "../../../types/api";
 import axios from "axios";
 import { AiOutlineLoading } from "react-icons/ai";
@@ -9,7 +9,21 @@ import { FaAngleLeft, FaAngleRight, FaFilter } from "react-icons/fa6";
 import CharacterCard from "@/components/CharacterCard";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function Personagens() {
+export default function PersonagensPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="justify-center">
+          <AiOutlineLoading color="#f00" className="animate-spin" size={32} />
+        </div>
+      }
+    >
+      <Personagens />
+    </Suspense>
+  );
+}
+
+function Personagens() {
   const navigation = useRouter();
   const params = useSearchParams();
 

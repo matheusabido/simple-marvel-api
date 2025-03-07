@@ -3,13 +3,27 @@
 import Header from "@/components/Header";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight, FaFilter } from "react-icons/fa6";
 import { Response, Comic } from "../../../types/api";
 import { AiOutlineLoading } from "react-icons/ai";
 import ComicCard from "@/components/ComicCard";
 
 export default function ComicsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="justify-center">
+          <AiOutlineLoading color="#f00" className="animate-spin" size={32} />
+        </div>
+      }
+    >
+      <Comics />
+    </Suspense>
+  );
+}
+
+function Comics() {
   const navigation = useRouter();
   const params = useSearchParams();
 

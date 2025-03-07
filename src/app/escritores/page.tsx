@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Creator, Response } from "../../../types/api";
 import axios from "axios";
 import { AiOutlineLoading } from "react-icons/ai";
@@ -10,6 +10,20 @@ import { useRouter, useSearchParams } from "next/navigation";
 import CreatorCard from "@/components/CreatorCard";
 
 export default function EscritoresPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="justify-center">
+          <AiOutlineLoading color="#f00" className="animate-spin" size={32} />
+        </div>
+      }
+    >
+      <Escritores />
+    </Suspense>
+  );
+}
+
+function Escritores() {
   const navigation = useRouter();
   const params = useSearchParams();
 
